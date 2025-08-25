@@ -91,6 +91,9 @@ systemctl restart php${PHP_VER}-fpm
 ############################
 # === Nextcloud holen ===
 ############################
+cd /tmp
+curl -fLO https://download.nextcloud.com/server/releases/latest.tar.bz2
+curl -fLO https://download.nextcloud.com/server/releases/latest.tar.bz2.sha256
 # Manche Mirrors packen Dateinamen rein, andere nur den Hash.
 # Wir extrahieren sicherheitshalber nur den 64-stelligen Hex-Hash:
 REMOTE_HASH="$(grep -Eo '^[0-9a-f]{64}' latest.tar.bz2.sha256)"
