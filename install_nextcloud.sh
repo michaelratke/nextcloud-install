@@ -215,8 +215,9 @@ sudo -u www-data php "${NC_WEBROOT}/occ" config:system:set default_phone_region 
 sudo -u www-data php "${NC_WEBROOT}/occ" background:cron
 
 # Cron einrichten (alle 5 Min) – idempotent
-CRONLINE="*/5 * * * * php -f ${NC_WEBROOT}/cron.php"
-( crontab -u www-data -l 2>/dev/null | grep -v "${NC_WEBROOT}/cron.php" ; echo "${CRONLINE}" ) | crontab -u www-data -
+PHP_BIN=$(command -v php)
+CRONLINE="*/5 * * * * ${PHP_BIN} -f ${NC_WEBROOT}/cron.php"
+( crontab -u www-data -l 2>/dev/null | grep -Fv "${NC_WEBROOT}/cron.php" ; echo "${CRONLINE}" ) | crontab -u www-data -
 
 restart_php_apache
 
