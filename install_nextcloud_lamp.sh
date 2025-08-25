@@ -5,7 +5,7 @@ set -euo pipefail
 # === Konfiguration ===
 ############################
 # Deine öffentliche Domain (über OPNSense/Nginx/ACME erreichbar)
-NC_DOMAIN="cloud.ratke.info"
+NC_DOMAIN="cloud.meine-domain.com"
 
 # Interne IP/Hostname der Ubuntu-VM (Apache-Backend), auf die OPNSense weiterleitet
 BACKEND_HOST="192.168.1.104"
