@@ -8,7 +8,7 @@ set -euo pipefail
 NC_DOMAIN="cloud.meine-domain.com"
 
 # Interne IP/Hostname der Ubuntu-VM (Apache-Backend), auf die OPNSense weiterleitet
-BACKEND_HOST="192.168.1.104"
+BACKEND_HOST="10.0.0.10"
 
 # OPNSense-/Proxy-IP, die als trusted_proxy eingetragen wird
 PROXY_IP="10.0.0.1"
