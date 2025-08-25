@@ -94,24 +94,22 @@ systemctl restart php${PHP_VER}-fpm
 cd /tmp
 curl -fLO https://download.nextcloud.com/server/releases/latest.tar.bz2
 curl -fLO https://download.nextcloud.com/server/releases/latest.tar.bz2.sha256
+
 # Manche Mirrors packen Dateinamen rein, andere nur den Hash.
 # Wir extrahieren sicherheitshalber nur den 64-stelligen Hex-Hash:
-REMOTE_HASH="$(grep -Eo '^[0-9a-f]{64}' latest.tar.bz2.sha256)"
-LOCAL_HASH="$(sha256sum latest.tar.bz2 | awk '{print $1}')"
+REMOTE_HASH=$(awk '{print $1}' latest.tar.bz2.sha256)
+LOCAL_HASH=$(sha256sum latest.tar.bz2 | awk '{print $1}')
 
-if [ -z "$REMOTE_HASH" ]; then
-  echo "Fehler: Konnte keinen SHA-256 Hash aus latest.tar.bz2.sha256 lesen."
-  exit 1
-fi
-
-if [ "$REMOTE_HASH" != "$LOCAL_HASH" ]; then
+if [ "$REMOTE_HASH" = "$LOCAL_HASH" ]; then
+  echo "Checksum OK ✅"
+  tar -xjf latest.tar.bz2
+else
   echo "Fehler: Checksum-Mismatch!"
   echo "Remote: $REMOTE_HASH"
   echo "Local : $LOCAL_HASH"
   exit 1
 fi
 
-tar -xjf latest.tar.bz2
 rm -rf "${NC_WEBROOT}"
 mv nextcloud "${NC_WEBROOT}"
 
