@@ -93,8 +93,8 @@ systemctl restart php${PHP_VER}-fpm
 ############################
 cd /tmp
 curl -LO https://download.nextcloud.com/server/releases/latest.tar.bz2
-curl -LO https://download.nextcloud.com/server/releases/latest.tar.bz2.sha256
-sha256sum -c latest.tar.bz2.sha256
+curl -LO https://download.nextcloud.com/server/releases/latest.tar.bz2.sha256sum
+sha256sum -c latest.tar.bz2.sha256sum
 tar -xjf latest.tar.bz2
 rm -rf "${NC_WEBROOT}"
 mv nextcloud "${NC_WEBROOT}"
