@@ -95,9 +95,8 @@ cd /tmp
 curl -fLO https://download.nextcloud.com/server/releases/latest.tar.bz2
 curl -fLO https://download.nextcloud.com/server/releases/latest.tar.bz2.sha256
 
-# Manche Mirrors packen Dateinamen rein, andere nur den Hash.
-# Wir extrahieren sicherheitshalber nur den 64-stelligen Hex-Hash:
-REMOTE_HASH=$(awk '{print $1}' latest.tar.bz2.sha256)
+# Die Zeile herausfiltern, die zu "latest.tar.bz2" gehört
+REMOTE_HASH=$(grep "latest.tar.bz2" latest.tar.bz2.sha256 | awk '{print $1}')
 LOCAL_HASH=$(sha256sum latest.tar.bz2 | awk '{print $1}')
 
 if [ "$REMOTE_HASH" = "$LOCAL_HASH" ]; then
